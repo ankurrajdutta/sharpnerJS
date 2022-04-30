@@ -37,12 +37,23 @@ title.value='Hello';
 var submit=document.querySelector('input[type="submit"]');
 submit.value='send';
 
-var item=document.querySelector('.list-group-item');
-item.style.backgroundColor='red';
+// var item=document.querySelector('.list-group-item');
+// item.style.backgroundColor='red';
 
-var lastItem=document.querySelector('.list-group-item:last-child');
-lastItem.style.backgroundColor="yellow";
+// var lastItem=document.querySelector('.list-group-item:last-child');
+// lastItem.style.backgroundColor="yellow";
 
+// var secondItem=document.querySelector('.list-group-item:nth-child(2)');
+// secondItem.style.backgroundColor='orange';
+
+var odd=document.querySelectorAll('li:nth-child(odd)');
+var even=document.querySelectorAll('li:nth-child(even)');
+console.log(odd);
+console.log(even);
+for(var i=0;i<odd.length;i++){
+    odd[i].style.backgroundColor='#f4f4f4';
+    even[i].style.backgroundColor='#ccc'
+}
 
 
 
