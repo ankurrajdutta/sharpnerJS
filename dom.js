@@ -12,10 +12,19 @@
 const items=document.getElementsByClassName('list-group-item');
 console.log(items);
 
-items[0].textContent='Hello';
-items[0].style.fontWeight='bold';
+// items[0].textContent='Hello';
+// items[0].style.fontWeight='bold';
 
 for(var i=0;i<items.length;i++){
     items[i].style.background='#f4f4f4';
+}
+
+// const headerTitle=document.getElementById('header-title').textContent;
+// console.log(headerTitle);
+
+const items1=document.getElementsByTagName('li');
+console.log(items1);
+for(var i=0;i<items1.length;i++){
+    items1[i].style.background='red';
 }
 
