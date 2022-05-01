@@ -67,24 +67,61 @@
 // console.log(list.lastElementChild);
 // list.lastElementChild.textContent="Hello 4";
 
-var newDiv=document.createElement('div');
-newDiv.className="hello";
-newDiv.id="hello1";
-newDiv.setAttribute('title','Hello Div');
-var newText=document.createTextNode('Hello WOrld');
-newDiv.appendChild(newText);
-var container=document.querySelector('header .container');
-var h1=document.querySelector('header h1');
-container.insertBefore(newDiv,h1);
+// var newDiv=document.createElement('div');
+// newDiv.className="hello";
+// newDiv.id="hello1";
+// newDiv.setAttribute('title','Hello Div');
+// var newText=document.createTextNode('Hello WOrld');
+// newDiv.appendChild(newText);
+// var container=document.querySelector('header .container');
+// var h1=document.querySelector('header h1');
+// container.insertBefore(newDiv,h1);
 
-var items=document.querySelector('#items');
-var newList=document.createElement('li');
-var newText1=document.createTextNode('Hello WOrld');
-newList.className="list-group-item";
-newList.appendChild(newText1);
-var li=document.querySelector('li');
-items.insertBefore(newList,li);
+// var items=document.querySelector('#items');
+// var newList=document.createElement('li');
+// var newText1=document.createTextNode('Hello WOrld');
+// newList.className="list-group-item";
+// newList.appendChild(newText1);
+// var li=document.querySelector('li');
+// items.insertBefore(newList,li);
 
+
+var form=document.querySelector('#addForm');
+var itemList=document.querySelector('#items');
+form.addEventListener('submit',addItem);
+itemList.addEventListener('click',removeItem);
+function addItem(e){
+    e.preventDefault();
+  
+    var input=document.querySelector('#item').value;
+   
+    var li=document.createElement('li');
+    li.className="list-group-item";
+    li.appendChild(document.createTextNode(input));
+    itemList.appendChild(li);
+
+    var delBtn=document.createElement('button');
+    delBtn.className='btn btn-danger btn-sm float-right delete';
+    delBtn.appendChild(document.createTextNode('X'));
+    li.appendChild(delBtn);
+    
+}
+function removeItem(e){
+    if(e.target.classList.contains('delete')){
+        if(confirm('Are you sure')){
+            var li=e.target.parentElement;
+            itemList.removeChild(li);
+        }
+    }
+}
+var list=document.querySelector('#items').children;
+console.log(list);
+for(var i=0;i<list.length;i++){
+    var editBtn=document.createElement('button');
+    // editBtn.className='btn btn-danger btn-sm float-right delete';
+    editBtn.appendChild(document.createTextNode('edit'));
+    list[i].appendChild(editBtn);
+}
 
 
 
