@@ -1,0 +1,159 @@
+ console.log('person1: shows Ticket');
+// console.log('person2: shows ticket');
+
+// const promiseWifeBringingTicks= new Promise((resolve,reject)=>{
+//     setTimeout(()=>resolve('ticket'),3000);
+// })
+
+// const getPopcorn=promiseWifeBringingTicks.then((t)=>{
+//     console.log('husband:we should go in');
+//     console.log('wife: no i am hungry');
+//     return new Promise((resolve,reject)=>resolve(`${t} popcorn`));
+// })
+
+// const getButter=getPopcorn.then((t)=>{
+//     console.log('husband: we should go in');
+//     console.log('wife: i need  some butter');
+//     return new Promise((resolve,reject)=>resolve(`${t} butter`));
+// })
+
+// getButter.then((t)=>console.log(t));
+
+
+
+
+// console.log('person4: shows Ticket');
+// console.log('person5: shows ticket');
+
+// -----------
+
+// console.log('person1: shows Ticket');
+// console.log('person2: shows ticket');
+
+// const preMovie=async()=>{
+//     const promiseWifeBringingTicks= new Promise((resolve,reject)=>{
+//             setTimeout(()=>reject('ticket'),3000);
+//         })
+    
+//     // const getPopcorn=new Promise((resolve,reject)=>resolve('popcorn'));
+//     let ticket;
+//     try{
+//     ticket=await promiseWifeBringingTicks;
+//     }
+//     catch{
+//         ticket='sad face'
+//     }
+//         // console.log('husband:we should go in');
+//         // console.log('wife: no i am hungry');
+    
+//     // let popcorn=await getPopcorn;
+//     //     console.log('husband: we should go in');
+//     //     console.log('wife: i need  some butter');
+
+//     const getButter=new Promise((resolve,reject)=>resolve('butter'));
+    
+
+//     // let butter=await getButter;
+//     //     console.log('wiife: it would be better if we take colddrinks');
+//     //     console.log('husband: let me get it ');
+    
+//     const getColdDrinks=new Promise((resolve,reject)=>resolve('coldDrinks'));
+//     // let coldDrinks= await getColdDrinks;
+//     //     console.log('husband: lets go and watch movie');
+
+//     // let [popcorn,butter,coldDrinks]= await Promise.all([getPopcorn,getButter,getColdDrinks]);
+
+//     // console.log(`${popcorn},${butter},${coldDrinks}`);
+
+   
+
+
+//     return ticket;
+    
+// }
+// preMovie().then((t)=>console.log(`person3: shows ${t}`));
+
+// console.log('person4: shows Ticket');
+// console.log('person5: shows ticket');   
+
+const posts=[
+        {title:'post one', body:'this is post one'},
+        {title:'post two', body:'this is post two'}
+    ]
+
+function createPost(post){
+            return new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    posts.push(post);
+        
+                    const error=false;
+                    if(!error){
+                        resolve();
+                    }
+                    else{
+                        reject('error: something went wrong');
+                    }
+                },1000)
+            });
+        }
+ function deletePost(){
+            return new Promise((resolve,reject)=>{
+                 setTimeout(()=>{
+                    let output=true;
+                    if(posts.length==0){
+                         output=false;
+                        reject('Array is emptynow');
+            
+                    }
+                    posts.pop();
+                     resolve();
+                        
+                       
+                 },1000)
+            })
+        }
+
+const postStuff=async()=>{
+
+    let post= {title:'post three', body:'this is post three'}
+
+    const createPost=new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            posts.push(post);
+
+            const error=false;
+            if(!error){
+                resolve('post added');
+            }
+            else{
+                reject('error: something went wrong');
+            }
+        },1000)
+    });
+
+    let create=await createPost;
+
+    const deletePost=new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+           let output=true;
+           if(posts.length==0){
+                output=false;
+               reject('Array is emptynow');
+   
+           }
+           posts.pop();
+            resolve();
+               
+              
+        },1000)
+   });
+
+   let del=await deletePost;
+
+   return create;
+}
+postStuff().then((t)=>console.log(t));
+
+
+
+
