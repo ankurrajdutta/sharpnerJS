@@ -40,14 +40,12 @@ function showNewUserOnScreen(user){
     document.getElementById('username').value = '';
     document.getElementById('phonenumber').value ='' ;
     // console.log(localStorage.getItem(user.emailId))
-    if(localStorage.getItem(user.email) !== null){
-        removeUserFromScreen(user.email)
-    }
+    
 
     const parentNode = document.getElementById('listOfUsers');
     const childHTML = `<li id=${user._id}> ${user.name} - ${user.email}
                             <button onclick=deleteUser('${user._id}')> Delete User </button>
-                            <button onclick=editUserDetails('${user._id}','${user.name}','${user.phonenumber}')>Edit User </button>
+                            <button onclick=editUserDetails('${user._id}','${user.email}','${user.name}','${user.phonenumber}')>Edit User </button>
                          </li>`
 
     parentNode.innerHTML = parentNode.innerHTML + childHTML;
@@ -55,13 +53,15 @@ function showNewUserOnScreen(user){
 
 //Edit User
 
-function editUserDetails(userID, name, phonenumber){
+function editUserDetails(userID,emailId,name,phonenumber){
 
     document.getElementById('email').value = emailId;
     document.getElementById('username').value = name;
     document.getElementById('phonenumber').value =phonenumber;
 
-    deleteUser(emailId)
+
+
+    deleteUser(userID)
  }
 
 // deleteUser('abc@gmail.com')
