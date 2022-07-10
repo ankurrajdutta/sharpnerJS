@@ -1,0 +1,84 @@
+let form=document.querySelector('#expenseTracker');
+
+
+    function addtoList(){
+        let expenseamount=document.querySelector('#expenseAmount').value;
+        let description=document.querySelector('#description').value;
+        let category=document.querySelector('#category').value;
+        var myObj={
+            expenseamount,
+            description,
+            category
+        };
+     
+        axios.post('https://crudcrud.com/api/74f7e7fd6d32491fa87a3cb8968fa0a9/data',myObj).then(res=>showinUI(res.data)).catch(err=>console.log(err));
+        // localStorage.setItem(description,JSON.stringify(myObj));
+        clearfields();
+    };
+    function clearfields(){
+        document.getElementById('expenseAmount').value="";
+        document.getElementById('description').value="";
+        document.getElementById('category').value="";
+    }
+    function showinUI(obj){
+        let listExpense=document.querySelector('#listExpense');
+        let childElement=`<li id=${obj._id}>
+        ${obj.expenseamount}-${obj.description}-${obj.category}
+        <button onclick=removeFromUI('${obj._id}')>Delete Expense</button>
+        <button onclick=editInUI('${obj._id}','${obj.expenseamount}','${obj.description}','${obj.category}')>Edit Expense</button>`;
+        listExpense.innerHTML=listExpense.innerHTML+childElement;
+    }
+
+    function loadfromStorage(){
+            axios.get('https://crudcrud.com/api/74f7e7fd6d32491fa87a3cb8968fa0a9/data').then(res=>{
+             
+                for(var i=0;i<res.data.length;i++)
+                showinUI(res.data[i]);
+            }).catch(err=>console.log(err))
+
+
+        }
+    //     var ObjKeys=Object.keys(localStorage);
+    //     for(var i=0;i<ObjKeys.length;i++){
+    //         var ObjLoaded=JSON.parse(localStorage.getItem(ObjKeys[i]));
+            
+    //         showinUI(ObjLoaded);
+    
+    //     }
+    // }
+    
+    function removeFromUI(_id){
+        let listExpense=document.querySelector('#listExpense');
+        let targetElement=document.getElementById(_id);
+        if(targetElement){
+            listExpense.removeChild(targetElement);
+        }
+        removeFromStorage(_id);
+    }
+    function removeFromStorage(_id){
+        // localStorage.removeItem(desc);
+        axios.delete(`https://crudcrud.com/api/74f7e7fd6d32491fa87a3cb8968fa0a9/data/${_id}`);
+    }
+    function editInUI(_id,expenseamount,description,category){
+
+       document.getElementById('expenseAmount').value=expenseamount;
+       document.getElementById('description').value=description;
+       document.getElementById('category').value=category;
+       removeFromUI(_id);
+       
+
+    }
+
+form.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    addtoList();
+
+})
+
+window.addEventListener('DOMContentLoaded',(e)=>{
+   loadfromStorage();
+})
+
+
+
+
